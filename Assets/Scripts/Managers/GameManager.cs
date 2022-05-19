@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+
+        if (mPlayerControllerReference.IsPaused) {
+            print("Game is paused");
+            Time.timeScale = 0;
+        }
+
         
     }
 }
