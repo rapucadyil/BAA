@@ -4867,6 +4867,7 @@ MonoBehaviour:
   mHealth: 100
   mMaxHealth: 100
   hurtParticleSysRef: {fileID: 1966920509}
+  mCurrentDice: {fileID: 11400000, guid: f365b7c1644a7c34997696dd305beb83, type: 2}
 --- !u!95 &5284218276568802715
 Animator:
   serializedVersion: 4

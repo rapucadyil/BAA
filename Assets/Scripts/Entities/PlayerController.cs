@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem hurtParticleSysRef;
 
+    [SerializeField] Dice mCurrentDice;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +26,19 @@ public class PlayerController : MonoBehaviour
         turnBasedManagerReference = GameObject.FindGameObjectWithTag("TurnBasedMgr").GetComponent<TurnBasedManager>();
         hpBar.SetMaxHealth(mMaxHealth);
         print($"Player({mPlayerAttributes.mPlayerClass}) : ({mHealth} / {mMaxHealth}) ");
+        /* var list = new List<int>();
+        for (int i = 0; i < 10; i++) {
+            list.Add(RandomUtils.RollDie(6,3));
+        }
+        for(int j = 0; j < list.Count; j++) {
+            print(list[j]);
+        } */
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            TakeDamage(10);
-        }
+
     }
 
     public void TakeDamage(int damage)
@@ -45,9 +53,7 @@ public class PlayerController : MonoBehaviour
         if (turnBasedManagerReference.CurrentTurn == Turn.PLAYER_TURN)
         {
             turnBasedManagerReference.NextTurn();
-        }
-        else
-        {
+            turnBasedManagerReference.CurrentEnemyReference.TakeDamage(RandomUtils.RollDie(mCurrentDice.numSides,mCurrentDice.numDice));    //hook this up to random generator later
         }
     }
 

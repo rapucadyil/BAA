@@ -11,6 +11,10 @@ public class TurnBasedManager : MonoBehaviour {
 
     [SerializeField] Turn mCurrentTurn;
 
+    [SerializeField] PlayerController mPlayerReference;
+
+    [SerializeField] EnemyController mCurrentEnemyReference;
+
     private void Start() {
         mCurrentTurn = Turn.PLAYER_TURN;
     }
@@ -32,14 +36,12 @@ public class TurnBasedManager : MonoBehaviour {
 
     private void Update() {
         
-        switch(mCurrentTurn) {
-            case Turn.PLAYER_TURN:
-                break;
-            case Turn.ENEMY_TURN:
-                break;
-        }
 
     }
 
     public Turn CurrentTurn { get => mCurrentTurn; }
+
+    public PlayerController PlayerReference {get => mPlayerReference;}
+
+    public EnemyController CurrentEnemyReference {get => mCurrentEnemyReference;}
 }
