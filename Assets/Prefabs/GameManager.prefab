@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7048569753478531391}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mSceneNames: []
   mCurrentSceneName: 
+  currentDieInUse: {fileID: 11400000, guid: f365b7c1644a7c34997696dd305beb83, type: 2}
+  attackRollsThisRun: 

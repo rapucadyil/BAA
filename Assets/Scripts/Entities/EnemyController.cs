@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
 
     void Start() {
         turnBasedReferenceMgr = GameObject.FindGameObjectWithTag("TurnBasedMgr").GetComponent<TurnBasedManager>();
-        mMaxHealth = mHealth = 50;
+        mMaxHealth = mHealth = 200;
         healthbarReferenceMgr.SetMaxHealth(mMaxHealth);
         mStrength = 5;
         mAgility = 4;
@@ -64,7 +64,7 @@ public class EnemyController : MonoBehaviour
             {
                 turnBasedReferenceMgr.NextTurn();
                 canAttack = false;
-                print("attacked!");
+                //print("attacked!");
             }
         }
 

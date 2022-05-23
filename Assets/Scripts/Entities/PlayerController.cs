@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     public TurnBasedManager turnBasedManagerReference;
 
+    public GameManager gameManagerReference;
+
     [SerializeField] HealthbarManager hpBar;
 
     [SerializeField] int mHealth;
@@ -24,15 +26,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         turnBasedManagerReference = GameObject.FindGameObjectWithTag("TurnBasedMgr").GetComponent<TurnBasedManager>();
+        gameManagerReference = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameManagerReference.currentDieInUse = mCurrentDice;
         hpBar.SetMaxHealth(mMaxHealth);
-        print($"Player({mPlayerAttributes.mPlayerClass}) : ({mHealth} / {mMaxHealth}) ");
-        /* var list = new List<int>();
-        for (int i = 0; i < 10; i++) {
-            list.Add(RandomUtils.RollDie(6,3));
-        }
-        for(int j = 0; j < list.Count; j++) {
-            print(list[j]);
-        } */
+
     }
 
     // Update is called once per frame
@@ -53,7 +50,10 @@ public class PlayerController : MonoBehaviour
         if (turnBasedManagerReference.CurrentTurn == Turn.PLAYER_TURN)
         {
             turnBasedManagerReference.NextTurn();
-            turnBasedManagerReference.CurrentEnemyReference.TakeDamage(RandomUtils.RollDie(mCurrentDice.numSides,mCurrentDice.numDice));    //hook this up to random generator later
+            int dmgRoll = RandomUtils.RollDie(mCurrentDice.numSides,mCurrentDice.numDice);
+            print($"Player rolled {dmgRoll}");
+            gameManagerReference.attackRollsThisRun[dmgRoll - mCurrentDice.numDice] += 1;
+            turnBasedManagerReference.CurrentEnemyReference.TakeDamage(dmgRoll);    //hook this up to random generator later
         }
     }
 
