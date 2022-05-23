@@ -57,6 +57,7 @@ public class EnemyController : MonoBehaviour
                 {
                     countdown = 0;
                     canAttack = true;
+                    turnBasedReferenceMgr.PlayerReference.TakeDamage(RandomUtils.RollDie(12, 2));
                 }
             }
             else
