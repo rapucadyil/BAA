@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         hpBar.SetHealth(mHealth);
     }
     public bool IsPaused {get => bIsPaused; set => bIsPaused = value; }
-
+    public Dice CurrentDice { get => mCurrentDice; set => mCurrentDice = value; }
     public void OnAttackButtonPressed() {
         if (turnBasedManagerReference.CurrentTurn == Turn.PLAYER_TURN)
         {
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
             int dmgRoll = RandomUtils.RollDie(mCurrentDice.numSides,mCurrentDice.numDice);
             print($"Player rolled {dmgRoll}");
             gameManagerReference.attackRollsThisRun[dmgRoll - mCurrentDice.numDice] += 1;
-            turnBasedManagerReference.CurrentEnemyReference.TakeDamage(dmgRoll);    //hook this up to random generator later
+            turnBasedManagerReference.CurrentEnemyReference.TakeDamage(dmgRoll);    
         }
     }
 
