@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6237255186064891098}
   m_Layer: 0
   m_Name: TurnBasedManager
-  m_TagString: Untagged
+  m_TagString: TurnBasedMgr
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,3 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCurrentTurn: 0
+  mPlayerReference: {fileID: 0}
+  mCurrentEnemyReference: {fileID: 0}
+  mAvailableEnemies:
+  - {fileID: 5666094842510257571, guid: b2d411796127468448e592697400d59d, type: 3}
+  - {fileID: 6673000261611216923, guid: 02e06e6bb3ce981488b9ef89efce324e, type: 3}
+  - {fileID: 9080054876704659883, guid: 09d935e373075d1439117b311081e9e0, type: 3}
+  currentEnemyIndex: 0

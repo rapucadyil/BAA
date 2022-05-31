@@ -46,5 +46,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mSceneNames: []
   mCurrentSceneName: 
-  currentDieInUse: {fileID: 11400000, guid: f365b7c1644a7c34997696dd305beb83, type: 2}
+  playerType: 
+  playerSpawnPosition: {x: -0.613, y: 0.11, z: 0}
+  enemySpawnPosition: {x: 0.582, y: 0.11, z: 0}
+  roguePrefab: {fileID: 5284218276568802708, guid: a149ffcbf5d992f4698c1452dcc5ce55, type: 3}
+  warriorPrefab: {fileID: 7330879979451575225, guid: d2a2215c0bf4e9f42a5cdf0348cc187e, type: 3}
+  lightEnemyPrefab: {fileID: 0}
+  medEnemyPrefab: {fileID: 0}
+  heavyEnemyPrefab: {fileID: 0}
+  currentDieInUse: {fileID: 0}
   attackRollsThisRun: 
+  graphLabels: []
+  gameLoaded: 0

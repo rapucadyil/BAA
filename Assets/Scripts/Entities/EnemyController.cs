@@ -23,10 +23,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float coolDown = 5000;
     [SerializeField] private bool canAttack = true;
 
+    public int CurrentHealth { get => mHealth; set => mHealth = value; }
+
 
     void Start() {
         turnBasedReferenceMgr = GameObject.FindGameObjectWithTag("TurnBasedMgr").GetComponent<TurnBasedManager>();
-        mMaxHealth = mHealth = 200;
+        healthbarReferenceMgr = GameObject.FindGameObjectWithTag("EnemyHPBar").GetComponent<HealthbarManager>();
         healthbarReferenceMgr.SetMaxHealth(mMaxHealth);
         mStrength = 5;
         mAgility = 4;
@@ -37,7 +39,12 @@ public class EnemyController : MonoBehaviour
     {
         hurtParticleSysRef.Play();
         mHealth -= damage;
-        healthbarReferenceMgr.SetHealth(mHealth);
+        if (healthbarReferenceMgr != null) {
+            healthbarReferenceMgr.SetHealth(mHealth);
+        }else{
+            healthbarReferenceMgr = GameObject.FindGameObjectWithTag("EnemyHPBar").GetComponent<HealthbarManager>();
+            healthbarReferenceMgr.SetHealth(mHealth);
+        }
     }
 
 

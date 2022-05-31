@@ -12,9 +12,23 @@ public class GameManager : MonoBehaviour
 
     PlayerController mPlayerControllerReference;
 
+    public string playerType;
+
+    public Vector3 playerSpawnPosition;
+    public Vector3 enemySpawnPosition;
+
+    public GameObject roguePrefab;
+    public GameObject warriorPrefab;
+
+    public GameObject lightEnemyPrefab;
+    public GameObject medEnemyPrefab;
+    public GameObject heavyEnemyPrefab;
+
     public Dice currentDieInUse;
     public int[] attackRollsThisRun;
     public string[] graphLabels;
+
+    public bool gameLoaded = false;
 
     private void Awake() {
         DontDestroyOnLoad(this);
@@ -29,16 +43,22 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            SceneManager.LoadScene("Stats Screen");
-            Screen.SetResolution (Screen.width, Screen.height, Screen.fullScreen);
+        if (gameLoaded) {
+            if (mPlayerControllerReference.CurrentHealth <= 0) {
+                SceneManager.LoadScene("Stats Screen");
+            }
         }
-        
+
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         print($"Scene name = {scene.name}");
         if (SceneManager.GetActiveScene().name == "SampleScene") {
+            if (playerType == "Rogue") {
+                Instantiate(roguePrefab, playerSpawnPosition, Quaternion.identity);
+            } else if (playerType == "Warrior") {
+                Instantiate(warriorPrefab, playerSpawnPosition, Quaternion.identity);
+            }
             mPlayerControllerReference = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             print($"Current Scene = {SceneManager.GetActiveScene().name}");
             currentDieInUse = mPlayerControllerReference.CurrentDice;
@@ -48,16 +68,18 @@ public class GameManager : MonoBehaviour
             for (int i = currentDieInUse.min; i < currentDieInUse.max+1; ++i) {
                 graphLabels[i - currentDieInUse.min] = i.ToString();
             }
+            gameLoaded = true;
         }
     }
 
 
     public void OnPlayButtonPressed() {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Character Select");
     }
 
     public void OnQuitButtonPressed() {
         Application.Quit();
     }
+
 
 }

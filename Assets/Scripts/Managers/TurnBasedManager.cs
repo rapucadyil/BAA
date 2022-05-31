@@ -15,8 +15,14 @@ public class TurnBasedManager : MonoBehaviour {
 
     [SerializeField] EnemyController mCurrentEnemyReference;
 
+    [SerializeField] GameObject[] mAvailableEnemies;
+
+    public int currentEnemyIndex;
+
     private void Start() {
+        mPlayerReference = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         mCurrentTurn = Turn.PLAYER_TURN;
+        currentEnemyIndex = 0;
     }
 
     /**
@@ -35,7 +41,20 @@ public class TurnBasedManager : MonoBehaviour {
     }
 
     private void Update() {
+        if (mCurrentEnemyReference == null) {
+            mCurrentEnemyReference = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
+        }
         
+        if (mCurrentEnemyReference.CurrentHealth <= 0) {
+            if (currentEnemyIndex >= mAvailableEnemies.Length) {
+                currentEnemyIndex = 0;
+            }
+            currentEnemyIndex++;
+            GameObject new_enemy = mAvailableEnemies[currentEnemyIndex];
+            Instantiate(new_enemy, mCurrentEnemyReference.transform.position, Quaternion.identity);
+            DestroyImmediate(mCurrentEnemyReference.gameObject, true);
+            mCurrentEnemyReference = GameObject.Find(new_enemy.name + "(Clone)").GetComponent<EnemyController>();
+        }
 
     }
 
